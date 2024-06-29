@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../static/Group.png">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>EcoBazar</title>
+</head>
+<body>
+    <div class="container">
+        <div class="location">
+            <img class="ll" src="../static/Contact.png">
+            <div class="selections">
+                <div class="selection">
+                    <select>
+                        <option>Eng</option>
+                        <option>Geo</option>
+                    </select>
+                    <select>
+                        <option>USD</option>
+                        <option>GEL</option>
+                    </select>
+                </div>
+                <div class="register">
+                    {% if current_user.is_authenticated %}            
+                        <a class="btn" href="/logout">Logout</a>
+                    {% else %}
+                        <a class="btn" href="/register">Register</a>
+                        <a class="btn" href="/login">Login</a>
+                    {%  endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="search">
+            <div class="logo">
+                <img src="../static/Logo.png" class="logo" alt="">
+            </div>
+            <div class="searchBar">
+                <div class="sb">
+                    <form action="/search" method="get">
+                        <input type="text" name="query" placeholder="Search...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+            <div class="icon">
+                {% block content %}
+                <a class="a-cart" href="/cart">
+                    <p class="cart">cart:</p>
+                    <div>
+                        <img src="../static/Rectangle.png">
+                    </div>
+                </a>
+                {% endblock %}
+            </div>
+        </div>
+        <div class="menu">
+            <div class="menu-item1">
+                <a href="/" class="menu-item">home</a>
+                <a href="/" class="menu-item">shop</a>
+                <a href="/addproduct" class="menu-item">add product</a>
+                <div class="dropdown">
+                    <button class="dropbtn">category</button>
+                    <div class="dropdown-content">
+                        <a href="/category/1">Fruit & Vegetables</a>
+                        <a href="/category/2">Meat & Fish</a>
+                        <a href="/category/3">Bread & Bakery</a>
+                        <a href="/category/4">Beauty & Health</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="menu-item2">
+                <img src="../static/Call Now.png" alt="">
+            </div>
+        </div>
+        <div class="imgs">
+            <img src="../static/Bannar Big.png" class="bigbaner i1" alt="">
+            <div class="imgs2">
+                <img class="i1" src="../static/Bannar.png" alt="">
+                <img class="i1" src="../static/Bannar (1).png" alt="">
+            </div>
+        </div>
+        <div class="baner4">
+            <div class="baner4-item">
+                <div class="">
+                    <img src="../static/Vector.png" alt="">
+                </div>
+                <div class="">
+                    <h4 class="h4p">Free Shipping</h4>
+                    <p class="h4p">Free shipping on all your order</p>
+                </div>
+            </div>
+            <div class="baner4-item">
+                <div class="">
+                    <img src="../static/Vector (2).png" alt="">
+                </div>
+                <div class="">
+                    <h4 class="h4p">Customer Support 24/7</h4>
+                    <p class="h4p">100% Secure Payment</p>
+                </div>
+            </div>
+            <div class="baner4-item">
+                <div class="">
+                    <img src="../static/Group (3).png" alt="">
+                </div>
+                <div class="">
+                    <h4 class="h4p">Money-Back Guarantee</h4>
+                    <p class="h4p">30 Days Money-Back Guarantee</p>
+                </div>
+            </div>
+            <div class="baner4-item">
+                <div class="">
+                    <img src="../static/Vector (1).png" alt="">
+                </div>
+                <div class="">
+                    <h4 class="h4p">Money-Back Guarantee</h4>
+                    <p class="h4p">30 Days Money-Back Guarantee</p>
+                </div>
+            </div>
+        </div>
+        <div class="popular-products">
+            <h1>popular products</h1>
+            <div class="">
+                <a href="">
+                    <p>view more</p>
+                    <img src="../static/Group (4).png" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="product-list">
+            {% for product in products %}
+            {% set img = product.file %}
+            <div class="product">
+                <a href="/detail/{{product['id']}}">
+                    <img class="p_img" src="{{ url_for('static', filename=img) }}">
+                </a>
+                <h3>{{product.name}}</h3>
+                <div class="pi">
+                    <p>price: {{product.price}}$</p>
+                    {% if sale %}
+                        <h3>sale</h3>
+                    {% endif %}
+                    <form method="POST" enctype="multipart/form-data">
+                        <a href="/add_to_cart/{{product.id}}">
+                            <img src="../static/Rectangle (1).png" alt="">
+                        </a>
+                    </form>       
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% include 'foother.html' %}
+    </div>
+</body>
+</html>

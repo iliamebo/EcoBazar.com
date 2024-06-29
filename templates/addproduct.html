@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../static/Group.png">
+    <link rel="stylesheet" href="../static/css/addProduct.css">
+    <title>EcoBazar</title>
+</head>
+<body>
+    {% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+    <form method="POST" class="form-register" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+
+        <div class="top">{{form.name(class="form", placeholder="name")}}</div>
+        <div>{{form.file(class="form",)}}</div>
+        <div>{{form.price(class="form", placeholder="price")}}</div>
+        <div>{{form.category (class="form")}}</div>
+        <div>{{form.submit (class="form")}}</div>
+    </form>
+    <div class="img">
+        <img src="../static/Image.png" alt="">
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

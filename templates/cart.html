@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../static/Group.png">
+    <link rel="stylesheet" href="../static/css/cart.css">
+    <title>EcoBazar</title>
+</head>
+<body>
+    {% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+    {% for product in products %}
+    {% set img = product.file %}
+        <div class="product">
+            <img src= "{{ url_for('static', filename=img) }}" >
+            <div class="container_item">
+                <div>
+                    <h5>{{ product.name }}</h5>
+                    <p>price:{{ product.price }}$</p>
+                    <p>quantity:{{product.quantity}}</p>
+                </div>
+                <form action="/remove_from_cart/{{ product.id }}" method="POST">
+                    <button type="submit" class="a">Delete</button>
+                </form>            
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <button class="total">
+        checkout:{{total_price}}$
+    </button>
+{% endblock %}
+</body>
+</html>

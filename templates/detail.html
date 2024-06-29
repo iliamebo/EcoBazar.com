@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/detail.css">
+    <link rel="icon" href="../static/Group.png">
+    <title>EcoBazar</title>
+</head>
+<body>
+{% extends "layout.html" %}
+{% block content %}
+{% set img = product.file %}
+<div class="c">
+    <div class="container">
+        <img src="{{ url_for('static', filename=img) }}" >
+        <div class="container_item">
+            <div>
+                <h5>{{ product.name }}</h5>
+                <p>Price: {{ product.price }}$</p>
+            </div>
+            {% if current_user.role == "admin" %}
+                <div class="admin_roles">
+                    <div class="a">
+                        <a href="/delete/{{ product.id }}">Delete</a> 
+                    </div>
+                    <a class="add_sale" href="/add_sale/{{ product.id }}">Add Sale</a> 
+                    <form  action="/delete_sale/{{ product.id }}" method="post">
+                        <input class="del_sale" type="submit" value="Delete Sale">
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../static/Group.png">
+    <title>Document</title>
+    <style>
+        form {
+            margin: 0 auto;
+            max-width: 600px;
+            max-height: 400px;
+            display: flex;
+            margin-top: 50px;
+            border-radius: 20px;
+            gap: 20px;
+            padding: 40px;
+            flex-direction: column;
+            border: 2px solid rgb(0, 168, 0);
+        }
+        .form-content {
+            border-radius: 8px;
+            padding: 5px;
+            border: 1px solid rgb(0, 168, 0);
+        }
+        .register {
+            background-color: rgb(0, 168, 0);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+    {% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+    <form method="POST" enctype=multipart/form-data class="form-register">
+        {{form.hidden_tag()}}
+
+        {{form.username(placeholder="Username", class="form-content")}}        
+        {{form.password(placeholder="Password", class="form-content")}}
+
+        {{form.register(class="register")}}
+    </form>
+</div>
+{% endblock %}
+</body>
+</html>
